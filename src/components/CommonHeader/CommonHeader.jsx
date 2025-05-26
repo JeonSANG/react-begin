@@ -5,7 +5,6 @@ const CommonHeader = ({ msg }) => {
   return (
     <div>
       <div className={styles.masthead}>
-{/*         <img src="/assets/img/bg-callout.jpg" alt="Background" /> */}
       </div>
     </div>
   );

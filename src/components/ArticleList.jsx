@@ -4,6 +4,7 @@ import PageScreen from '../components/PageScreen'
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPaging } from '../redux/action';
+import { MESSAGES } from '../constants/messages';
 const ArticleList = () => {
   const [articleInfoList, setArticleInfoList] = useState([]);
   const [nowPage, setNowPage] = useState(1);
@@ -100,34 +101,6 @@ const ArticleList = () => {
     alert(articleId)
     navigate('/ArticleDetail', { state: { articleId, nowPage } });
   };
-  const prevPage = () => {
-    if (getPaging.currentPage > 2) {
-      // fetchData(Math.max(getPaging.currentPage - displayMaxPageCount, 1));
-      fetchData(getPaging.currentPage - 1);
-    }
-  };
-
-  const nextPage = () => {
-    if (getPaging.currentPage !== getPaging.totalPage) {
-      fetchData(getPaging.currentPage +1);
-    }
-  };
-  const lastPage = () => {
-    if (getPaging.currentPage !== getPaging.totalPage) {
-      fetchData(getPaging.totalPage);
-    }
-  };
-  const firstPage = () => {
-    if (getPaging.currentPage !== 1) {
-      fetchData(1);
-    }
-  };
-
-  const changeNowPage = (page) => {
-    if (page !== getPaging.currentPage) {
-      fetchData(page);
-    }
-  };
 
   return (
     <div align="center">
@@ -156,9 +129,9 @@ const ArticleList = () => {
             <table className="table table-hover table-striped w-76" style={{ marginBottom: '50px' }}>
               <thead>
                 <tr>
-                  <th className="fixed-th" style={{ width: '30%' }}>記事番号</th>
-                  <th className="fixed-th" style={{ width: '40%' }}>タイトル</th>
-                  <th className="fixed-th" style={{ width: '30%' }}>作成時間</th>
+                  <th className="fixed-th" style={{ width: '30%' }}>{MESSAGES.ARTICLE_NO}</th>
+                  <th className="fixed-th" style={{ width: '40%' }}>{MESSAGES.ARTICLE_TITLE}</th>
+                  <th className="fixed-th" style={{ width: '30%' }}>{MESSAGES.CREATED_AT}</th>
                 </tr>
               </thead>
               <tbody>
@@ -186,14 +159,7 @@ const ArticleList = () => {
           </div>
         )}
         <div style={{ textAlign: 'right', width: '100%' }}>
-
-           <PageScreen
-            prevPage={prevPage}
-            nextPage={nextPage}
-            firstPage={firstPage}
-            lastPage={lastPage}
-            changeNowPage={changeNowPage}z
-          />
+           <PageScreen/>
         </div>
       </div>
     </div>
